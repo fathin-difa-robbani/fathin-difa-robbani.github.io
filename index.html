@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fathin Difa Robbani</title>
+<meta name="author" content="Fathin Difa Robbani">
+<meta name="description" content="Fathin Difa Robbani: researcher working on LLM-based human simulation, computational social science, and interpretability.">
+<script>
+  // Apply the saved theme before first paint to avoid a flash.
+  (function () {
+    var t = 'auto';
+    try { t = localStorage.getItem('theme') || 'auto'; } catch (e) {}
+    if (t !== 'auto') document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: rgba(0, 0, 0, 0.8);
+    --heading: rgba(0, 0, 0, 0.87);
+    --muted: rgba(0, 0, 0, 0.54);
+    --primary: #1565c0;
+    --nav-bg: #ffffff;
+    --nav-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, 0.11);
+    --rule: #e9ecef;
+    --card-bg: #ffffff;
+    --card-border: rgba(0, 0, 0, 0.08);
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #181818;
+      --fg: rgba(255, 255, 255, 0.82);
+      --heading: rgba(255, 255, 255, 0.92);
+      --muted: rgba(255, 255, 255, 0.55);
+      --primary: #64b5f6;
+      --nav-bg: #1f1f1f;
+      --nav-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, 0.5);
+      --rule: #2a2a2a;
+      --card-bg: #202020;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #181818;
+    --fg: rgba(255, 255, 255, 0.82);
+    --heading: rgba(255, 255, 255, 0.92);
+    --muted: rgba(255, 255, 255, 0.55);
+    --primary: #64b5f6;
+    --nav-bg: #1f1f1f;
+    --nav-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, 0.5);
+    --rule: #2a2a2a;
+    --card-bg: #202020;
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 17px/1.7 Roboto, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  a { color: var(--primary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  h1, h2, h3, .brand, .portrait-title h2 { font-family: Montserrat, sans-serif; color: var(--heading); }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- Navbar ---------- */
+  .navbar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--nav-bg); box-shadow: var(--nav-shadow);
+  }
+  .navbar .container { display: flex; align-items: center; height: 64px; gap: 32px; }
+  .brand { font-weight: 700; font-size: 18px; color: var(--heading); white-space: nowrap; }
+  .brand:hover { text-decoration: none; color: var(--primary); }
+  .menu { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .menu a { color: var(--fg); font-size: 16px; font-weight: 400; }
+  .menu a:hover, .menu a.active { color: var(--primary); text-decoration: none; }
+  .theme-toggle {
+    margin-left: auto; background: none; border: 0; cursor: pointer;
+    color: var(--fg); font-size: 18px; padding: 8px; line-height: 1;
+  }
+  .theme-toggle:hover { color: var(--primary); }
+  .menu-btn { display: none; background: none; border: 0; color: var(--fg); font-size: 20px; cursor: pointer; padding: 8px; }
+
+  /* ---------- Sections: heading left (4/12), content right (8/12) ---------- */
+  .home-section { padding: 110px 0; border-bottom: 1px solid var(--rule); }
+  .home-section:last-of-type { border-bottom: 0; }
+  .row { display: grid; grid-template-columns: 4fr 8fr; gap: 30px; }
+  .section-heading h1 { font-size: 2.2rem; font-weight: 700; margin: 0; line-height: 1.25; }
+  .section-subheading { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 1.25rem; color: var(--heading); margin: 0 0 12px; }
+
+  /* ---------- About ---------- */
+  #about { padding-top: 80px; }
+  .portrait { text-align: center; }
+  .avatar {
+    width: 270px; height: 270px; border-radius: 50%;
+    object-fit: cover; object-position: 50% 12%;
+    display: block; margin: 0 auto;
+  }
+  .portrait-title h2 { font-size: 1.75rem; font-weight: 400; margin: 20px 0 6px; }
+  .portrait-title h3 { font-family: Roboto, sans-serif; font-size: 1.05rem; font-weight: 400; color: var(--muted); margin: 0 0 4px; line-height: 1.5; }
+  .network-icon { list-style: none; padding: 0; margin: 16px 0 0; display: flex; justify-content: center; gap: 18px; }
+  .network-icon a { color: var(--fg); font-size: 1.75rem; }
+  .network-icon a:hover { color: var(--primary); text-decoration: none; }
+  .about-body h1 { font-size: 2.2rem; font-weight: 700; margin: 0 0 16px; }
+  .about-body p { margin: 0 0 16px; }
+  .about-cols { display: grid; grid-template-columns: 5fr 7fr; gap: 30px; margin-top: 28px; }
+  .ul-interests { margin: 0; padding-left: 20px; }
+  .ul-interests li { margin-bottom: 4px; }
+  .ul-edu { list-style: none; margin: 0; padding: 0; }
+  .ul-edu li { display: flex; gap: 12px; margin-bottom: 14px; }
+  .ul-edu i { color: var(--fg); margin-top: 6px; width: 20px; text-align: center; }
+  .ul-edu .course { margin: 0; font-weight: 400; line-height: 1.4; }
+  .ul-edu .institution { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+  /* ---------- Publication / research cards ---------- */
+  .card-simple {
+    background: var(--card-bg); border: 1px solid var(--card-border); box-shadow: var(--card-shadow);
+    border-radius: 6px; padding: 22px 24px; margin-bottom: 24px;
+  }
+  .article-metadata { color: var(--muted); font-size: 0.9rem; }
+  .article-metadata .me { font-weight: 700; color: var(--fg); }
+  .article-title { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 1.2rem; line-height: 1.4; margin: 10px 0 8px; }
+  .article-title a { color: var(--heading); }
+  .article-title a:hover { color: var(--primary); text-decoration: none; }
+  .card-simple p { margin: 0; }
+  .btn-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .btn-links a {
+    border: 1px solid var(--primary); color: var(--primary); border-radius: 4px;
+    font-size: 0.85rem; padding: 3px 12px; line-height: 1.6;
+  }
+  .btn-links a:hover { background: var(--primary); color: var(--bg); text-decoration: none; }
+  .btn-links i { margin-right: 4px; }
+  .status { display: inline-block; font-size: 0.78rem; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--card-border); color: var(--muted); margin-left: 6px; vertical-align: 2px; }
+
+  /* ---------- Experience list ---------- */
+  .exp { list-style: none; margin: 0; padding: 0; }
+  .exp > li { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .exp > li:first-child { padding-top: 0; }
+  .exp > li:last-child { border-bottom: 0; }
+  .exp > li > i { color: var(--muted); margin-top: 6px; width: 20px; text-align: center; }
+  .exp .role { font-weight: 700; color: var(--heading); }
+  .exp .meta { color: var(--muted); font-size: 0.9rem; }
+  .exp .project { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 0.98rem; color: var(--heading); margin: 12px 0 2px; }
+  .bullets { margin: 6px 0 0; padding-left: 20px; }
+  .bullets li { margin-bottom: 6px; }
+
+  footer { padding: 32px 0 40px; color: var(--muted); font-size: 0.85rem; text-align: center; border-top: 1px solid var(--rule); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 991px) {
+    .row { grid-template-columns: 1fr; gap: 24px; }
+    .section-heading { text-align: center; }
+    .home-section { padding: 64px 0; }
+    #about { padding-top: 48px; }
+    .about-body h1 { text-align: center; }
+  }
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+    .container { padding: 0 16px; }
+    .menu-btn { display: block; }
+    .navbar .container { gap: 8px; }
+    .menu {
+      display: none; position: absolute; top: 64px; left: 0; right: 0;
+      flex-direction: column; gap: 0; background: var(--nav-bg); box-shadow: var(--nav-shadow);
+    }
+    .menu.open { display: flex; }
+    .menu a { display: block; padding: 12px 16px; }
+    .brand { font-size: 16px; }
+    .avatar { width: 200px; height: 200px; }
+    .about-cols { grid-template-columns: 1fr; gap: 20px; }
+    .section-heading h1, .about-body h1 { font-size: 1.8rem; }
+    .card-simple { padding: 18px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <button class="menu-btn" aria-label="Open menu" onclick="document.getElementById('menu').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+    <a class="brand" href="#about">Fathin Difa Robbani</a>
+    <ul class="menu" id="menu">
+      <li><a href="#about">About me</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#industry">Industry</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Theme"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ===== About ===== -->
+  <section id="about" class="home-section">
+    <div class="container row">
+      <div class="portrait">
+        <img class="avatar" src="images/profile.jpg" alt="Fathin Difa Robbani" width="270" height="270">
+        <div class="portrait-title">
+          <h2>Fathin Difa Robbani</h2>
+          <h3>Independent Researcher<br>LLM Human Simulation &amp; Computational Social Science</h3>
+          <h3>Jakarta, Indonesia</h3>
+        </div>
+        <ul class="network-icon">
+          <li><a href="mailto:difarobbani267@gmail.com" aria-label="Email" title="Email"><i class="fas fa-envelope"></i></a></li>
+          <li><a href="https://scholar.google.com/citations?user=To9PM9gAAAAJ" aria-label="Google Scholar" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a></li>
+          <li><a href="https://orcid.org/0009-0000-6184-8919" aria-label="ORCID" title="ORCID"><i class="fab fa-orcid"></i></a></li>
+          <li><a href="https://github.com/fathindifa26" aria-label="GitHub" title="GitHub"><i class="fab fa-github"></i></a></li>
+          <li><a href="https://linkedin.com/in/fathindifarobbani" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
+        </ul>
+      </div>
+
+      <div class="about-body">
+        <h1>About me</h1>
+        <p>
+          I study how large language models (LLMs) can become faithful simulators of human behavior, such as survey responses,
+          by capturing the heterogeneity of real populations rather than merely producing human-like answers.
+        </p>
+        <p>
+          Trained in both Sociology and Computer Science, I work at the intersection of computational social science, NLP, and
+          mechanistic interpretability. My current work examines how LLMs internally represent demographic identity. I find that
+          some of these representations mirror the structure of real survey data, yet do not drive the model's outputs: there is
+          a gap between what a model <em>represents</em> and what it <em>uses</em>. I aim to close this gap by developing
+          training objectives and models that recover real differences between social groups.
+        </p>
+
+        <div class="about-cols">
+          <div>
+            <div class="section-subheading">Interests</div>
+            <ul class="ul-interests">
+              <li>LLM-based human simulation</li>
+              <li>Computational social science</li>
+              <li>Public opinion &amp; survey methodology</li>
+              <li>Mechanistic interpretability</li>
+              <li>Calibration</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-subheading">Education</div>
+            <ul class="ul-edu">
+              <li>
+                <i class="fas fa-graduation-cap"></i>
+                <div>
+                  <p class="course">Master of Computer Science (Artificial Intelligence), 2025</p>
+                  <p class="institution">Gadjah Mada University · GPA 3.98/4.00</p>
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-graduation-cap"></i>
+                <div>
+                  <p class="course">Bachelor of Social Science (Sociology), 2023</p>
+                  <p class="institution">Gadjah Mada University · Computational Social Science focus</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Publications ===== -->
+  <section id="publications" class="home-section">
+    <div class="container row">
+      <div class="section-heading"><h1>Publications</h1></div>
+      <div>
+        <div class="card-simple">
+          <div class="article-metadata"><span class="me">Fathin Difa Robbani</span> · 2026 · arXiv preprint</div>
+          <div class="article-title"><a href="https://arxiv.org/abs/2608.18768">Readable, Faithful, Used: Three Dissociable Properties of Demographic Identity in a Language Model</a></div>
+          <p>
+            Individual attention heads encode group identity in a way that matches real-world opinion structure across 169
+            intersectional groups, yet causal interventions show that the model's outputs rely on one of the <em>least</em>
+            faithful pathways, which can push answers away from survey truth.
+          </p>
+          <div class="btn-links">
+            <a href="https://arxiv.org/abs/2608.18768"><i class="fas fa-scroll"></i>arXiv</a>
+            <a href="https://arxiv.org/pdf/2608.18768"><i class="fas fa-file-pdf"></i>PDF</a>
+            <a href="https://github.com/fathindifa26/readable-faithful-used"><i class="fab fa-github"></i>Code &amp; data</a>
+          </div>
+        </div>
+
+        <div class="card-simple">
+          <div class="article-metadata">J. A. Lopo, W. Leksono, T. H. Wong, <span class="me">F. D. Robbani</span> · 2026 · Manuscript in preparation</div>
+          <div class="article-title">Sublayer Dominance in the Emergence of Language Specificity in Multilingual LLMs</div>
+          <p>
+            Attributes the emergence of language identity to attention vs. MLP sublayers using Shapley values, with language
+            directions recovered from two independent sources and calibrated against random-direction baselines.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Research Experience ===== -->
+  <section id="research" class="home-section">
+    <div class="container row">
+      <div class="section-heading"><h1>Research Experience</h1></div>
+      <div>
+        <ul class="exp">
+          <li>
+            <i class="fas fa-flask"></i>
+            <div>
+              <div class="role">Independent Researcher, LLM Human Simulation</div>
+              <div class="meta">Jakarta · Aug 2026 – present</div>
+              <div class="project">Readable, Faithful, Used <a href="#publications">[P1]</a></div>
+              <ul class="bullets">
+                <li>Asked why LLM survey simulators produce homogeneous, unfaithful group answers. Used representational similarity analysis against Pew ATP ground truth across 169 intersectional demographic groups to score 1,089 read-out locations in Mistral-7B.</li>
+                <li>Found individual attention heads whose representations of group identity match real-world opinion structure (selection-corrected ρ up to 0.63), beating the standard residual read-out and a lexical baseline. The finding replicates at a family-specific address in Qwen3-8B.</li>
+                <li>Showed through layer-wise causal interventions that causal use does not follow fidelity. The strongest causal pathway sits in one of the <em>least</em> faithful attribute types (exact p = 0.002), and a donor-control experiment shows it can push outputs <em>away</em> from survey truth.</li>
+                <li>Released a fully reproducible pipeline: the main causal statistics can be re-run on CPU from the shipped data.</li>
+              </ul>
+              <div class="project">Group-Resolved Calibration <span class="status">In progress</span></div>
+              <ul class="bullets">
+                <li>Building on [P1]'s finding that group differences on individual survey questions are hard to recover from model representations, I am developing a training objective that directly targets how each group deviates from the population average, rather than matching group-level distributions as prior work does.</li>
+                <li>Testing whether frozen probes can recover this signal or whether it requires fine-tuning (LoRA), to establish whether the signal is absent from the model or has simply never been trained for.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <i class="fas fa-users"></i>
+            <div>
+              <div class="role">Collaborative Researcher, Multilingual LLM Interpretability</div>
+              <div class="meta">Sep 2026 – present · <a href="#publications">[P2]</a></div>
+              <ul class="bullets">
+                <li>Attributing the emergence of language identity to attention vs. MLP sublayers using Shapley values, which makes the attribution independent of execution order.</li>
+                <li>Recovering language directions from two independent sources (residual differences between translation pairs; vocabulary-space unembedding rows), calibrated against random-direction baselines.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <i class="fas fa-microchip"></i>
+            <div>
+              <div class="role">Deep Learning Researcher, Finshot Inc.</div>
+              <div class="meta">Jakarta · Nov 2024 – Dec 2025</div>
+              <ul class="bullets">
+                <li>Ran applied research on cross-domain face verification (selfie ↔ ID card) under scarce labels, using metric learning (Multi-Similarity, Circle, Triplet losses), synthetic data, and domain adaptation.</li>
+                <li>Built PyTorch training and evaluation pipelines from scratch; raised real-world matching accuracy from ~70% to 94% (93% recall) through iterative, diagnosis-driven experimentation (ROC analysis, hard-negative mining).</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <i class="fas fa-graduation-cap"></i>
+            <div>
+              <div class="role">Master's Thesis Research, Gadjah Mada University</div>
+              <div class="meta">2024 – 2025</div>
+              <ul class="bullets">
+                <li>Applied adaptive meta-learner-based knowledge distillation to compress TP-GAN face frontalization while preserving downstream recognition quality.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <i class="fas fa-graduation-cap"></i>
+            <div>
+              <div class="role">Bachelor's Thesis Research, Gadjah Mada University</div>
+              <div class="meta">2022 – 2023</div>
+              <ul class="bullets">
+                <li>Mapped the power struggle between actors over labor and investment issues in Indonesia's Omnibus Law, using social network analysis of Twitter data to identify opinion communities and influential actors. This was my first work on measuring public opinion computationally, and it led to my current research.</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Industry Experience ===== -->
+  <section id="industry" class="home-section">
+    <div class="container row">
+      <div class="section-heading"><h1>Industry Experience</h1></div>
+      <div>
+        <ul class="exp">
+          <li>
+            <i class="fas fa-briefcase"></i>
+            <div>
+              <div class="role">Data Science Manager, WPP Media Indonesia (Unilever account)</div>
+              <div class="meta">Jan 2026 – present</div>
+              <ul class="bullets">
+                <li>Lead data science for a major FMCG account. Built LLM agent infrastructure (MCP servers over a BigQuery warehouse, with a semantic safety layer) and a multimodal system for analyzing marketing creatives.</li>
+                <li>Open-sourced distilled references: <a href="https://github.com/fathindifa26/whatsapp-data-agent">whatsapp-data-agent</a>, <a href="https://github.com/fathindifa26/lineage-anywhere">lineage-anywhere</a>.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <i class="fas fa-briefcase"></i>
+            <div>
+              <div class="role">Founding Engineer (part-time), Menilik.id</div>
+              <div class="meta">Feb 2026 – present</div>
+              <ul class="bullets">
+                <li>Sole engineer building a multi-agent LLM system (LangGraph) that serves Indonesian-language hospital patients over WhatsApp.</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Teaching ===== -->
+  <section id="teaching" class="home-section">
+    <div class="container row">
+      <div class="section-heading"><h1>Teaching</h1></div>
+      <div>
+        <ul class="exp">
+          <li>
+            <i class="fas fa-chalkboard-teacher"></i>
+            <div>
+              <div class="role">Data Science Lecturer, Purwadhika Digital Technology School</div>
+              <div class="meta">Apr 2023 – Nov 2024</div>
+              <ul class="bullets">
+                <li>Designed and taught a full curriculum (Python, SQL, statistics, visualization, machine learning) to career-switching adults; 100% of alumni employed within 3.5 months.</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">© 2026 Fathin Difa Robbani · Layout inspired by the Hugo Academic theme</div>
+</footer>
+
+<script>
+  // Theme cycle: auto -> light -> dark -> auto (like Hugo Academic).
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    var icon = btn.querySelector('i');
+    var order = ['auto', 'light', 'dark'];
+    var icons = { auto: 'fa-circle-half-stroke', light: 'fa-sun', dark: 'fa-moon' };
+    var labels = { auto: 'Theme: automatic', light: 'Theme: light', dark: 'Theme: dark' };
+    function get() { try { return localStorage.getItem('theme') || 'auto'; } catch (e) { return 'auto'; } }
+    function apply(t) {
+      if (t === 'auto') document.documentElement.removeAttribute('data-theme');
+      else document.documentElement.setAttribute('data-theme', t);
+      icon.className = 'fas ' + icons[t];
+      btn.title = labels[t];
+      btn.setAttribute('aria-label', labels[t]);
+    }
+    var current = get();
+    apply(current);
+    btn.addEventListener('click', function () {
+      current = order[(order.indexOf(current) + 1) % order.length];
+      try { localStorage.setItem('theme', current); } catch (e) {}
+      apply(current);
+    });
+
+    // Close mobile menu after picking a section.
+    document.querySelectorAll('#menu a').forEach(function (a) {
+      a.addEventListener('click', function () { document.getElementById('menu').classList.remove('open'); });
+    });
+
+    // Highlight the nav link of the section in view.
+    var links = {};
+    document.querySelectorAll('#menu a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && links[e.target.id]) {
+            Object.values(links).forEach(function (l) { l.classList.remove('active'); });
+            links[e.target.id].classList.add('active');
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+    }
+  })();
+</script>
+</body>
+</html>
